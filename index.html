@@ -4,11 +4,12 @@
 
 <div>
   <textarea id=input>blabla</textarea>
-  <input type=button id=submit value=submit>
+  <p id=submit>&gt;</p>
 </div>
 
 <div>
   <div id=output>spinner</div>
+  <p id=back>&lt;</p>
 </div>
 
 <script src=js/jquery.js></script>
@@ -24,10 +25,13 @@
     query.action = 'englishLetter';
     query.data = {input: Scout('#input').value};
     query.resp = function (data) {
+      // TODO remplacer spinner par output
       Scout('#output').value = data.output;
     };
     query.error = function () {};
 
   });
+
+  // TODO click sur back revient au premier ecran
 
 </script>
