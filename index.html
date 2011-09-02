@@ -2,19 +2,13 @@
 <meta charset=utf8>
 <title>Injector</title>
 
-<div id=screen1>
-  <ul>
-    <li>bidon 1
-    <li>bidon 2
-  </ul>
-</div>
-
-<div id=screen2>
+<div>
   <textarea id=input>blabla</textarea>
+  <input type=button id=submit value=submit>
 </div>
 
-<div id=screen3>
-  spinner
+<div>
+  <div id=output>spinner</div>
 </div>
 
 <script src=js/jquery.js></script>
@@ -22,4 +16,18 @@
 <script src=js/scout.js></script>
 
 <script>
+
+  Scout('#submit').on('click', function (query) {
+
+    // TODO passer a l'ecran suivant avec spinner
+    
+    query.action = 'englishLetter';
+    query.data = {input: Scout('#input').value};
+    query.resp = function (data) {
+      Scout('#output').value = data.output;
+    };
+    query.error = function () {};
+
+  });
+
 </script>
