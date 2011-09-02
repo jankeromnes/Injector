@@ -23,15 +23,15 @@
     // TODO passer a l'ecran suivant avec spinner
     
     query.action = 'englishLetter';
-    query.data = {input: Scout('#input').value};
-    query.resp = function (data) {
+    query.data = Scout('#input').value;
+    query.resp = function (output) {
       // TODO remplacer spinner par output
-      Scout('#output').value = data.output;
+      Scout('#output').textContent = output;
     };
     query.error = function () {};
 
   });
 
-  // TODO click sur back revient au premier ecran
+  // TODO click sur < revient au premier ecran
 
 </script>
