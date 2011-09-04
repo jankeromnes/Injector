@@ -2,36 +2,158 @@
 <meta charset=utf8>
 <title>Injector</title>
 
-<div>
-  <textarea id=input>blabla</textarea>
-  <p id=submit>&gt;</p>
+	<p id=submit>&gt;</p>
+
+<div id="page" class="slide">
+	
+	
+
+	<div id=part1 class="inner">
+	  <textarea id=input>blabla</textarea>
+	</div>
+
+	<div id=part2 class="inner">
+	  spinner
+	</div>
+
+	<div id=part3 class="inner">
+		outputos
+	</div>
+	
 </div>
 
-<div>
-  <div id=output>spinner</div>
-  <p id=back>&lt;</p>
-</div>
+	<p id=back>&lt;</p>
 
 <script src=js/jquery.js></script>
 <script src=js/spin.js></script>
 <script src=js/scout.js></script>
+<link rel="stylesheet" href="style.css">
 
 <script>
 
-  Scout('#submit').on('click', function (query) {
+$(document).ready(function() {
 
-    // TODO passer a l'ecran suivant avec spinner
+//-------------------initialisation--------------
+	
+	var flag =1;
+	
+	var $toto = $('#page #part2');
+    $toto.animate({
+      marginLeft: parseInt($toto.css('marginLeft'),10) == 0 ?
+        $toto.outerWidth() :
+        0
+    });
+
+	var $tata = $('#page #part3');
+    $tata.animate({
+      marginLeft: parseInt($toto.css('marginLeft'),10) == 0 ?
+        $tata.outerWidth() :
+        0
+    });
+//----------------------------------------
+
+//****************************** CLICK SUBMIT ****************************
+  Scout('#submit').on('click', function (query) {
+	
+//-------------------- passage a l'ecran spinner au click---------------
     
+	$('#part2').css('visibility',"visible");
+	$('#part3').css('visibility',"visible");
+	if (flag==1)
+	{
+	console.log("click droit et flag==1");
+        var $lefty = $('#page #part1');
+        $lefty.animate({
+          left: parseInt($lefty.css('left'),10) == 0 ?
+            -$lefty.outerWidth() :
+            0
+		});
+	  var $marginLefty = $('#page #part2');
+	    $marginLefty.animate({
+	      marginLeft: parseInt($marginLefty.css('marginLeft'),10) == 0 ?
+		$marginLefty.outerWidth() :
+		0
+	    });
+	console.log(flag);
+	flag=2;
+	}
+//----------------------------
     query.action = 'englishLetter';
     query.data = Scout('#input').value;
     query.resp = function (output) {
-      // TODO remplacer spinner par output
-      Scout('#output').textContent = output;
+ 
+      Scout('#part3').textContent = output;
+	
+	//------------- remplacement spinner par output -----------------------
+	   var $lefty = $('#slideleft #part2');
+        $lefty.animate({
+          left: parseInt($lefty.css('left'),10) == 0 ?
+            -$lefty.outerWidth() :
+            0
+		});
+	  var $marginLefty = $('#slideleft #part3');
+	    $marginLefty.animate({
+	      marginLeft: parseInt($marginLefty.css('marginLeft'),10) == 0 ?
+		$marginLefty.outerWidth() :
+		0
+	    });
+		flag=3;
+	//---------------------------------------------------------------------
     };
-    query.error = function () {};
+    query.error = function () {
+//TODO possib de faire un slide d' erreur etc
+
+
+	};
 
   });
 
-  // TODO click sur < revient au premier ecran
+  //********************** CLICK BACK ************************
 
+Scout('#back').on('click', function (query) {
+    
+// quelque soit l' endroit ou l' on est spinner ou output cela fait revenir a l' input
+	$('#part2').css('visibility',"visible");
+	$('#part3').css('visibility',"visible");
+	if (flag==2)
+	{
+	console.log("click gauche et flag==2");
+        var $lefty = $('#page #part1');
+        $lefty.animate({
+          left: parseInt($lefty.css('left'),10) == 0 ?
+            -$lefty.outerWidth() :
+            0
+        });
+  var $marginLefty = $('#page #part2');
+    $marginLefty.animate({
+      marginLeft: parseInt($marginLefty.css('marginLeft'),10) == 0 ?
+        $marginLefty.outerWidth() :
+        0
+    });
+
+flag=1;
+	}
+	if (flag==3)
+	{
+	
+	console.log("click gauche et flag==2");
+        var $lefty = $('#page #part1');
+        $lefty.animate({
+          left: parseInt($lefty.css('left'),10) == 0 ?
+            -$lefty.outerWidth() :
+            0
+        });
+  var $marginLefty = $('#page #part3');
+    $marginLefty.animate({
+      marginLeft: parseInt($marginLefty.css('marginLeft'),10) == 0 ?
+        $marginLefty.outerWidth() :
+        0
+    });
+
+flag=2;
+	}
+  });
+
+
+});
 </script>
