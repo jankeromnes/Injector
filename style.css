@@ -35,3 +35,19 @@ background-color: #EE1111;
 visibility: hidden;
 }
 
+#submit{
+	height: 50px;
+	margin: 1em 0;
+	overflow: hidden;
+	position: relative;
+	width: 50px;
+}
+
+#back{
+	height: 50px;
+	margin: 1em 0;
+	overflow: hidden;
+	position: relative;
+	width: 50px;
+
+}
